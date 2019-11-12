@@ -1,0 +1,1 @@
+add_cnoid_simple_controller(TankJoyTopicController TankJoyTopicController.cpp)
