@@ -8,13 +8,11 @@ using namespace std;
 using namespace cnoid;
 
 namespace {
-
 const int trackAxisID[]  = { Joystick::L_STICK_H_AXIS, Joystick::L_STICK_V_AXIS };
 const int turretAxisID[] = { Joystick::R_STICK_H_AXIS, Joystick::R_STICK_V_AXIS };
-
 }
 
-class TankJoyTopicController : public SimpleController
+class JoyInputController : public SimpleController
 {
     ros::NodeHandle node;
     ros::Subscriber joystickSubscriber;
@@ -29,7 +27,6 @@ class TankJoyTopicController : public SimpleController
     double dt;
 
 public:
-
     virtual bool initialize(SimpleControllerIO* io) override
     {
         ostream& os = io->os();
@@ -52,7 +49,7 @@ public:
             io->enableIO(joint);
         }
 
-        joystickSubscriber = node.subscribe("joy", 1, &TankJoyTopicController::joystickCallback, this);
+        joystickSubscriber = node.subscribe("joy", 1, &JoyInputController::joystickCallback, this);
 
         return true;
     }
@@ -112,4 +109,4 @@ public:
     }
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(TankJoyTopicController)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(JoyInputController)

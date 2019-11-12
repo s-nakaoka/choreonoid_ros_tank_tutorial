@@ -1,1 +1,3 @@
-add_cnoid_simple_controller(TankJoyTopicController TankJoyTopicController.cpp)
+add_cnoid_simple_controller(JoyInputController JoyInputController.cpp)
+add_cnoid_simple_controller(JointStateOutputController JointStateOutputController.cpp)
+

@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="choreonoid_joy" name="choreonoid_joy" type="node" />
+  <node pkg="choreonoid_ros" name="choreonoid" type="choreonoid"
+	args="$(find choreonoid_ros_tank_tutorial)/project/step2.cnoid --start-simulation" />
+  <node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
+  <node pkg="rqt_plot" name="rqt_plot" type="rqt_plot" args="/tank/joint_state/position[0] /tank/joint_state/position[1]" />
+</launch>

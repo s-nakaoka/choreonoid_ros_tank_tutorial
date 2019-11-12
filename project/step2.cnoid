@@ -55,11 +55,17 @@ items:
                 isOldTargetVariableMode: false
             - 
               id: 4
-              name: "BodyPublisher"
-              plugin: ROS
-              class: BodyPublisherItem
+              name: "JointStateOutputController"
+              plugin: Body
+              class: SimpleControllerItem
               data: 
-                maxPublishRate: 30
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "JointStateOutputController.so"
+                baseDirectory: "Controller directory"
+                reloading: false
+                exportSymbols: false
+                isOldTargetVariableMode: false
         - 
           id: 5
           name: "Labo1"
@@ -305,6 +311,18 @@ toolbars:
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
+  "BodyBar": 
+    current: 2
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -338,18 +356,6 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
-  "BodyBar": 
-    current: 2
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
-  "KinematicsBar": 
-    mode: AUTO
-    enablePositionDragger: true
-    penetrationBlock: false
-    collisionLinkHighlight: false
-    snapDistance: 0.025
-    penetrationBlockDepth: 0.0005
-    lazyCollisionDetectionMode: true
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
