@@ -1,3 +1,4 @@
 add_cnoid_simple_controller(JoyInputController JoyInputController.cpp)
 add_cnoid_simple_controller(JointStateOutputController JointStateOutputController.cpp)
 add_cnoid_simple_controller(ImuOutputController ImuOutputController.cpp)
+add_cnoid_simple_controller(CameraImageOutputController CameraImageOutputController.cpp)

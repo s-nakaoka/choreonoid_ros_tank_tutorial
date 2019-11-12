@@ -44,6 +44,7 @@ public:
             jointState.name[i] = joint->name();
         }
 
+        time = 0.0;
         timeStep = io->timeStep();
         cycleTime = 1.0 / frequency;
         timeCounter = 0.0;

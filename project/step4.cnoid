@@ -79,21 +79,8 @@ items:
                 reloading: false
                 exportSymbols: false
                 isOldTargetVariableMode: false
-            - 
-              id: 6
-              name: "CameraImageOutputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "CameraImageOutputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
         - 
-          id: 7
+          id: 6
           name: "Labo1"
           plugin: Body
           class: BodyItem
@@ -118,7 +105,7 @@ items:
             selfCollisionDetection: false
             isEditable: false
         - 
-          id: 8
+          id: 7
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -147,25 +134,6 @@ items:
             kinematicWalking: false
             2Dmode: false
             oldAccelSensorMode: false
-          children: 
-            - 
-              id: 9
-              name: "GLVisionSimulator"
-              plugin: Body
-              class: GLVisionSimulatorItem
-              data: 
-                enabled: true
-                maxFrameRate: 1000
-                maxLatency: 1
-                recordVisionData: false
-                threadMode: Sensor
-                bestEffort: true
-                allSceneObjects: false
-                rangeSensorPrecisionRatio: 2
-                depthError: 0
-                enableHeadLight: true
-                enableAdditionalLights: true
-                antiAliasing: false
 views: 
   - 
     id: 0
@@ -178,8 +146,8 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      checked: [ 1, 2, 7 ]
-      expanded: [ 1, 2, 8 ]
+      checked: [ 1, 2, 6 ]
+      expanded: [ 1, 2, 7 ]
   - 
     id: 2
     plugin: Base
@@ -358,6 +326,16 @@ toolbars:
     autoExpansion: true
   "BodyBar": 
     current: 2
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -391,16 +369,6 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
-  "KinematicsBar": 
-    mode: AUTO
-    enablePositionDragger: true
-    penetrationBlock: false
-    collisionLinkHighlight: false
-    snapDistance: 0.025
-    penetrationBlockDepth: 0.0005
-    lazyCollisionDetectionMode: true
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -415,7 +383,7 @@ Body:
         showPpcom: false
         showZmp: false
       - 
-        bodyItem: 7
+        bodyItem: 6
         showCenterOfMass: false
         showPpcom: false
         showZmp: false

@@ -1,6 +1,7 @@
 #include <cnoid/SimpleController>
 #include <cnoid/AccelerationSensor>
 #include <cnoid/RateGyroSensor>
+#include <cnoid/ConnectionSet>
 #include <ros/node_handle.h>
 #include <sensor_msgs/Imu.h>
 
@@ -15,6 +16,7 @@ class ImuOutputController : public SimpleController
 {
     AccelerationSensorPtr accelSensor;
     RateGyroSensorPtr gyro;
+    ScopedConnectionSet sensorConnections;
     ros::NodeHandle node;
     ros::Publisher imuPublisher;
     sensor_msgs::Imu imu;
@@ -38,21 +40,25 @@ public:
         io->enableInput(accelSensor);
         io->enableInput(gyro);
 
-        accelSensor->sigStateChanged().connect(
-            [&](){
-                auto dv = accelSensor->dv();
-                imu.linear_acceleration.x = dv.x();
-                imu.linear_acceleration.y = dv.y();
-                imu.linear_acceleration.z = dv.z();
-            });
+        sensorConnections.disconnect();
 
-        gyro->sigStateChanged().connect(
-            [&](){
-                auto w = gyro->w();
-                imu.angular_velocity.x = w.x();
-                imu.angular_velocity.y = w.y();
-                imu.angular_velocity.z = w.z();
-            });
+        sensorConnections.add(
+            accelSensor->sigStateChanged().connect(
+                [&](){
+                    auto dv = accelSensor->dv();
+                    imu.linear_acceleration.x = dv.x();
+                    imu.linear_acceleration.y = dv.y();
+                    imu.linear_acceleration.z = dv.z();
+                }));
+
+        sensorConnections.add(
+            gyro->sigStateChanged().connect(
+                [&](){
+                    auto w = gyro->w();
+                    imu.angular_velocity.x = w.x();
+                    imu.angular_velocity.y = w.y();
+                    imu.angular_velocity.z = w.z();
+                }));
 
         for(int i=0; i < 9; ++i){
             imu.orientation_covariance[i] = 0.0;
@@ -65,6 +71,7 @@ public:
         imu.orientation.z = 0.0;
         imu.orientation.w = 0.0;
 
+        time = 0.0;
         timeStep = io->timeStep();
         cycleTime = 1.0 / frequency;
         timeCounter = 0.0;
