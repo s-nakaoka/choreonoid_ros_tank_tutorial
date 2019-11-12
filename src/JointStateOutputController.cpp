@@ -6,7 +6,7 @@ using namespace std;
 using namespace cnoid;
 
 namespace {
-const double frequency = 10.0;
+const double frequency = 20.0;
 }
 
 class JointStateOutputController : public SimpleController

@@ -66,28 +66,41 @@ items:
                 reloading: false
                 exportSymbols: false
                 isOldTargetVariableMode: false
-            - 
-              id: 5
-              name: "ImuOutputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "ImuOutputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
+        - 
+          id: 5
+          name: "Tank2"
+          plugin: Body
+          class: BodyItem
+          data: 
+            modelFile: "${SHARE}/model/Tank/Tank.body"
+            currentBaseLink: ""
+            rootPosition: [ 2, -0.5, 0.1 ]
+            rootAttitude: [ 
+              -1, -1.2246468e-16, 0, 
+              1.2246468e-16, -1, 0, 
+              0, 0, 1 ]
+            jointDisplacements: [  0.000000,  0.000000 ]
+            jointPositions: [  0.000000,  0.000000 ]
+            initialRootPosition: [ 2, -0.5, 0.1 ]
+            initialRootAttitude: [ 
+              -1, -1.2246468e-16, 0, 
+              1.2246468e-16, -1, 0, 
+              0, 0, 1 ]
+            initialJointPositions: [  0.000000,  0.000000 ]
+            zmp: [ 0, 0, 0 ]
+            collisionDetection: true
+            selfCollisionDetection: false
+            isEditable: true
+          children: 
             - 
               id: 6
-              name: "CameraImageOutputController"
+              name: "JointStateInputController"
               plugin: Body
               class: SimpleControllerItem
               data: 
                 isNoDelayMode: false
                 controllerOptions: ""
-                controller: "CameraImageOutputController.so"
+                controller: "JointStateInputController.so"
                 baseDirectory: "Controller directory"
                 reloading: false
                 exportSymbols: false
@@ -147,25 +160,6 @@ items:
             kinematicWalking: false
             2Dmode: false
             oldAccelSensorMode: false
-          children: 
-            - 
-              id: 9
-              name: "GLVisionSimulator"
-              plugin: Body
-              class: GLVisionSimulatorItem
-              data: 
-                enabled: true
-                maxFrameRate: 1000
-                maxLatency: 1
-                recordVisionData: false
-                threadMode: Sensor
-                bestEffort: true
-                allSceneObjects: false
-                rangeSensorPrecisionRatio: 2
-                depthError: 0
-                enableHeadLight: true
-                enableAdditionalLights: true
-                antiAliasing: false
 views: 
   - 
     id: 0
@@ -178,8 +172,8 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      checked: [ 1, 2, 7 ]
-      expanded: [ 1, 2, 8 ]
+      checked: [ 1, 2, 5, 7 ]
+      expanded: [ 1, 2, 5, 8 ]
   - 
     id: 2
     plugin: Base
@@ -234,9 +228,9 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 10000
-          eye: [ -6.44723288, -3.30408906, 3.23335936 ]
-          direction: [ 0.819988251, 0.45015162, -0.353529047 ]
-          up: [ 0.309902039, 0.170127932, 0.935423547 ]
+          eye: [ -4.83764074, -3.02200817, 2.67508791 ]
+          direction: [ 0.768470642, 0.539452159, -0.344157291 ]
+          up: [ 0.281682172, 0.197735669, 0.938912008 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -293,6 +287,7 @@ views:
       cameras: 
         - 
           camera: [ System, Perspective ]
+          isCurrent: true
           fieldOfView: 0.6978
           near: 0.01
           far: 100
@@ -304,9 +299,6 @@ views:
           orthoHeight: 20
           near: 0.01
           far: 100
-        - 
-          camera: [ Tank, Kinect ]
-          isCurrent: true
       backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
       gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
       xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
@@ -332,6 +324,11 @@ views:
       showPhases: false
   - 
     id: 7
+    name: "Link Properties"
+    plugin: Body
+    class: LinkPropertyView
+  - 
+    id: 8
     plugin: Body
     class: LinkSelectionView
     state: 
@@ -341,23 +338,27 @@ views:
         - 
           id: 2
           selectedLinks: [ 0 ]
+        - 
+          id: 5
+          selectedLinks: [ 0 ]
   - 
-    id: 8
+    id: 9
+    name: "Position"
+    plugin: Body
+    class: PositionView
+    state: 
+      coordinateMode: world
+      preferredCoordinateMode: body
+      showRPY: true
+      uniqueRPY: false
+      showQuoternion: false
+      showRotationMatrix: false
+      disableCustomIK: false
+  - 
+    id: 10
     plugin: Python
     class: PythonConsoleView
 toolbars: 
-  "TimeBar": 
-    minTime: 0
-    maxTime: 30
-    frameRate: 1000
-    playbackFrameRate: 60
-    idleLoopDrivenMode: false
-    currentTime: 0
-    speedScale: 1
-    syncToOngoingUpdates: true
-    autoExpansion: true
-  "BodyBar": 
-    current: 2
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -391,6 +392,18 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 1000
+    playbackFrameRate: 60
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: true
+    autoExpansion: true
+  "BodyBar": 
+    current: 2
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "KinematicsBar": 
@@ -411,6 +424,11 @@ Body:
     editableSceneBodies: 
       - 
         bodyItem: 2
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 5
         showCenterOfMass: false
         showPpcom: false
         showZmp: false

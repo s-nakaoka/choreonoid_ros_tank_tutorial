@@ -189,9 +189,9 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 10000
-          eye: [ -6.44723288, -3.30408906, 3.23335936 ]
-          direction: [ 0.819988251, 0.45015162, -0.353529047 ]
-          up: [ 0.309902039, 0.170127932, 0.935423547 ]
+          eye: [ -4.83764074, -3.02200817, 2.67508791 ]
+          direction: [ 0.768470642, 0.539452159, -0.344157291 ]
+          up: [ 0.281682172, 0.197735669, 0.938912008 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -287,42 +287,37 @@ views:
       showPhases: false
   - 
     id: 7
+    name: "Link Properties"
+    plugin: Body
+    class: LinkPropertyView
+  - 
+    id: 8
     plugin: Body
     class: LinkSelectionView
     state: 
       listingMode: "Link List"
-      currentBodyItem: 2
       bodyItems: 
         - 
           id: 2
           selectedLinks: [ 0 ]
   - 
-    id: 8
+    id: 9
+    name: "Position"
+    plugin: Body
+    class: PositionView
+    state: 
+      coordinateMode: world
+      preferredCoordinateMode: body
+      showRPY: true
+      uniqueRPY: false
+      showQuoternion: false
+      showRotationMatrix: false
+      disableCustomIK: false
+  - 
+    id: 10
     plugin: Python
     class: PythonConsoleView
 toolbars: 
-  "TimeBar": 
-    minTime: 0
-    maxTime: 30
-    frameRate: 1000
-    playbackFrameRate: 60
-    idleLoopDrivenMode: false
-    currentTime: 0
-    speedScale: 1
-    syncToOngoingUpdates: true
-    autoExpansion: true
-  "BodyBar": 
-    current: 2
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
-  "KinematicsBar": 
-    mode: AUTO
-    enablePositionDragger: true
-    penetrationBlock: false
-    collisionLinkHighlight: false
-    snapDistance: 0.025
-    penetrationBlockDepth: 0.0005
-    lazyCollisionDetectionMode: true
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -356,12 +351,29 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "TimeBar": 
+    minTime: 0
+    maxTime: 30
+    frameRate: 1000
+    playbackFrameRate: 60
+    idleLoopDrivenMode: false
+    currentTime: 0
+    speedScale: 1
+    syncToOngoingUpdates: true
+    autoExpansion: true
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
-  "BodySelectionManager": 
-    currentBodyItem: 2
-    currentLink: "CHASSIS"
   "EditableSceneBody": 
     editableSceneBodies: 
       - 
@@ -401,7 +413,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 410, 409 ]
+          sizes: [ 407, 406 ]
           children: 
             - 
               type: pane
@@ -414,7 +426,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 585, 234 ]
+          sizes: [ 581, 232 ]
           children: 
             - 
               type: splitter
