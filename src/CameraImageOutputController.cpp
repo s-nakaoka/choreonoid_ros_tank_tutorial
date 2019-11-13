@@ -36,6 +36,8 @@ public:
 
         time = 0.0;
         timeStep = io->timeStep();
+
+        return true;
     }
 
     virtual bool control() override

@@ -48,6 +48,8 @@ public:
         timeStep = io->timeStep();
         cycleTime = 1.0 / frequency;
         timeCounter = 0.0;
+
+        return true;
     }
 
     virtual bool control() override
