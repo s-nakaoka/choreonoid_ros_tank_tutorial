@@ -50,7 +50,7 @@ public:
     virtual bool control() override
     {
         {
-            std::lock_guard<std::mutex> lock(mutex);
+            std::lock_guard<std::mutex> lock(jointStateMutex);
             int n = std::min(2, (int)jointState.position.size());
             for(int i=0; i < n; ++i){
                 qref_next[i] = jointState.position[i];

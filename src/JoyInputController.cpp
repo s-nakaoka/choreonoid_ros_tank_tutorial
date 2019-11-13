@@ -64,7 +64,7 @@ public:
     {
         sensor_msgs::Joy joystick;
         {
-            std::lock_guard<std::mutex> lock(mutex);
+            std::lock_guard<std::mutex> lock(joystickMutex);
             joystick = latestJoystickState;
             joystick.axes.resize(10, 0.0f);
             joystick.buttons.resize(10, 0);
