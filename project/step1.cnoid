@@ -42,13 +42,13 @@ items:
           children: 
             - 
               id: 3
-              name: "TankJoyTopicController"
+              name: "JoyInputController"
               plugin: Body
               class: SimpleControllerItem
               data: 
                 isNoDelayMode: true
                 controllerOptions: ""
-                controller: "TankJoyTopicController.so"
+                controller: "JoyInputController"
                 baseDirectory: "Controller directory"
                 reloading: false
                 exportSymbols: false
