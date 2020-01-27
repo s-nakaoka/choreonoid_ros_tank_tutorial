@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(choreonoid_ros_tank_tutorial)
 
+set(CHOREONOID_SKIP_QT_CONFIG true)
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
