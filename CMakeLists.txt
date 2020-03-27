@@ -1,5 +1,11 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.5.0)
 project(choreonoid_ros_tank_tutorial)
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING
+    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+    FORCE)
+endif()
 
 set(CHOREONOID_SKIP_QT_CONFIG true)
 
@@ -20,6 +26,8 @@ else()
   add_compile_options(-std=c++14)
 endif()
 
+set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS ${CHOREONOID_COMPILE_DEFINITIONS})
+
 include_directories(
   ${catkin_INCLUDE_DIRS} 
   ${CHOREONOID_INCLUDE_DIRS}
@@ -30,11 +38,3 @@ link_directories(
   )
 
 add_subdirectory(src)
-
-#install(FILES
-#  project/step1.cnoid
-#  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/project)
-#
-#install(FILES
-#  launch/step1.launch
-#  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
