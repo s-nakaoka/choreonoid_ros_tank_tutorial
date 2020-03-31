@@ -4,7 +4,6 @@
 #include <sensor_msgs/Joy.h>
 #include <mutex>
 
-using namespace std;
 using namespace cnoid;
 
 namespace {
@@ -14,7 +13,7 @@ const int turretAxisID[] = { Joystick::R_STICK_H_AXIS, Joystick::R_STICK_V_AXIS 
 
 class JoyInputController : public SimpleController
 {
-    unique_ptr<ros::NodeHandle> node;
+    std::unique_ptr<ros::NodeHandle> node;
     ros::Subscriber joystickSubscriber;
     sensor_msgs::Joy latestJoystickState;
     std::mutex joystickMutex;
@@ -27,11 +26,11 @@ class JoyInputController : public SimpleController
     double dt;
 
 public:
-    virtual bool configure(SimpleControllerConfig* config)
+    virtual bool configure(SimpleControllerConfig* config) override
     {
         if(!ros::isInitialized()){
             config->os() << config->controllerName()
-                         << " cannot be configured because ROS is not initialized." << endl;
+                         << " cannot be configured because ROS is not initialized." << std::endl;
             return false;
         }
         node.reset(new ros::NodeHandle);
@@ -40,7 +39,7 @@ public:
 
     virtual bool initialize(SimpleControllerIO* io) override
     {
-        ostream& os = io->os();
+        std::ostream& os = io->os();
         Body* body = io->body();
         dt = io->timeStep();
 
@@ -77,9 +76,9 @@ public:
         {
             std::lock_guard<std::mutex> lock(joystickMutex);
             joystick = latestJoystickState;
-            joystick.axes.resize(10, 0.0f);
-            joystick.buttons.resize(10, 0);
         }
+        joystick.axes.resize(Joystick::NUM_STD_AXES, 0.0f);
+        joystick.buttons.resize(Joystick::NUM_STD_BUTTONS, 0);
             
         double pos[2];
         for(int i=0; i < 2; ++i){
